@@ -28,17 +28,18 @@ const styles = theme => ({
 });
 
 function App(props) {
-  const { classes, dispatch } = props;
+  const { classes } = props;
 
   const [open, setOpen] = useState(true);
   const [refetch, setRefetch] = useState(1);
 
   useEffect(() => {
+    const { dispatch } = props;
     getUsers().then(result => dispatch(getPosts(result)));
   }, [refetch]);
 
   function handleDrawerOpen() {
-    setOpen(false);
+    setOpen(true);
   }
 
   function handleDrawerClose() {
@@ -52,7 +53,7 @@ function App(props) {
         <SideBar open={open} close={handleDrawerClose} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Route path="/dashboard" component={Welcome} />
+          <Route path="/dashboard/" component={Welcome} />
           <Route path="/nested/" component={ServiceB} />
           <Route path="/list/" component={SimpleTable} />
         </main>
