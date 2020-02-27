@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
-import { updateName } from '../store/actions/name';
+import React, { Component, Fragment } from "react";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
+import { updateName } from "../../../store/actions/name";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
+    paddingBottom: theme.spacing.unit * 2
+  }
 });
 
 export class Welcome extends Component {
@@ -27,7 +27,7 @@ export class Welcome extends Component {
             Welcome
           </Typography>
           <Typography
-            style={{ color: '#3f51b5' }}
+            style={{ color: "#3f51b5" }}
             variant="headline"
             component="h2"
           >
@@ -50,14 +50,14 @@ export class Welcome extends Component {
 }
 
 const mapStateToProps = state => ({
-  name: state.name,
+  name: state.name
 });
 
 const mapDispatchToProps = {
-  updateName,
+  updateName
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(withStyles(styles)(Welcome));
