@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   Button,
   Form,
@@ -13,7 +13,7 @@ import {
 const { PUBLIC_URL } = process.env;
 
 function Login() {
-  // let history = useHistory();
+  let history = useHistory();
 
   const [loading, setLoading] = useState(false);
   const [fakeAccount] = useState({
@@ -70,7 +70,7 @@ function Login() {
         fakeAccount.username === username &&
         fakeAccount.password === password
       ) {
-        // history.push("/list-barang");
+        history.push("/dashboard");
       } else {
         setServerMessage("Your username or password is wrong");
       }
