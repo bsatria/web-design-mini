@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     height: "100vh",
     overflow: "auto"
   },
@@ -28,15 +28,14 @@ const styles = theme => ({
 });
 
 function App(props) {
-  const { classes } = props;
+  const { classes, dispatch } = props;
 
   const [open, setOpen] = useState(true);
-  const [refetch, setRefetch] = useState(1);
+  const [refetch] = useState(1);
 
   useEffect(() => {
-    const { dispatch } = props;
     getUsers().then(result => dispatch(getPosts(result)));
-  }, [refetch]);
+  }, [refetch, dispatch]);
 
   function handleDrawerOpen() {
     setOpen(true);

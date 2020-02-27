@@ -10,8 +10,8 @@ import { connect } from "react-redux";
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2)
   }
 });
 
@@ -34,14 +34,10 @@ function ServiceB(props) {
   return (
     <Fragment>
       <Paper className={classes.root} elevation={1}>
-        <Typography variant="display1" gutterBottom component="h2">
+        <Typography variant="h4" gutterBottom component="h2">
           Service B
         </Typography>
-        <Typography
-          style={{ color: "#3f51b5" }}
-          variant="headline"
-          component="h2"
-        >
+        <Typography style={{ color: "#3f51b5" }} variant="h4" component="h2">
           {name}
         </Typography>
         <Typography style={{ marginTop: 30 }} component="p">

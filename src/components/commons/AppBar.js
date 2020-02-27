@@ -63,7 +63,7 @@ function Navbar(props) {
         </IconButton>
         <Typography
           component="h1"
-          variant="title"
+          variant="h4"
           color="inherit"
           noWrap
           className={classes.title}

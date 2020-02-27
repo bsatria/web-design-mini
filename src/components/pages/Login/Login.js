@@ -13,8 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
-const { PUBLIC_URL } = process.env;
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Copyright() {
   return (
@@ -63,6 +62,10 @@ export default function Login() {
     password: ""
   });
   const [error, setError] = useState({
+    username: false,
+    password: false
+  });
+  const [errorText, setErrorText] = useState({
     username: "",
     password: ""
   });
@@ -87,21 +90,26 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setServerMessage("");
     setLoading(true);
     const { username, password } = formValue;
     if (username === "") {
       setLoading(false);
-      setError({ username: "Please enter your username" });
+      setError({ username: true });
+      setErrorText({ username: "Please enter your username" });
       return;
     } else {
-      setError({ username: "" });
+      setError({ username: false });
+      setErrorText({ username: "" });
     }
     if (password === "") {
       setLoading(false);
-      setError({ password: "Please enter your password" });
+      setError({ password: true });
+      setErrorText({ password: "Please enter your password" });
       return;
     } else {
-      setError({ password: "" });
+      setError({ password: false });
+      setErrorText({ password: "" });
     }
     fakeAuth.authenticate(() => {
       setLoading(false);
@@ -143,6 +151,7 @@ export default function Login() {
             autoFocus
             onChange={handleChange}
             error={error.username}
+            helperText={errorText.username}
           />
           <TextField
             variant="outlined"
@@ -156,6 +165,7 @@ export default function Login() {
             autoComplete="current-password"
             onChange={handleChange}
             error={error.password}
+            helperText={errorText.password}
           />
           <Button
             type="submit"
@@ -164,7 +174,7 @@ export default function Login() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            {loading ? <CircularProgress color="secondary" /> : "Sign In"}
           </Button>
           <Grid container>
             <Grid item xs>

@@ -21,7 +21,7 @@ const actionsStyles = theme => ({
   root: {
     flexShrink: 0,
     color: theme.palette.text.secondary,
-    marginLeft: theme.spacing.unit * 2.5
+    marginLeft: theme.spacing(2.5)
   }
 });
 
@@ -96,8 +96,8 @@ const styles = theme => ({
   },
   root2: {
     ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2)
   },
   table: {
     minWidth: 500
@@ -111,7 +111,7 @@ function SimpleTable(props) {
   const { classes, posts } = props;
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, posts.length - page * rowsPerPage);
@@ -127,7 +127,7 @@ function SimpleTable(props) {
   return (
     <Paper className={classes.root}>
       <Typography
-        variant="display1"
+        variant="h4"
         style={{ marginLeft: 20, marginTop: 20 }}
         gutterBottom
         component="h2"
