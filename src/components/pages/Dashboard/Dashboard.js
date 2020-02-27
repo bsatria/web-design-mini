@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -14,50 +14,41 @@ const styles = theme => ({
   }
 });
 
-export class Welcome extends Component {
-  changeName = e => {
-    this.props.updateName(e.target.value);
-  };
-  render() {
-    const { classes, name } = this.props;
-    return (
-      <Fragment>
-        <Paper className={classes.root} elevation={1}>
-          <Typography variant="display1" gutterBottom component="h2">
-            Welcome
-          </Typography>
-          <Typography
-            style={{ color: "#3f51b5" }}
-            variant="headline"
-            component="h2"
-          >
-            {name}
-          </Typography>
-          <Typography style={{ marginTop: 30 }} component="p">
-            this is your home page served by Service A
-          </Typography>
-          <TextField
-            id="standard-name"
-            label="Name"
-            value={name}
-            margin="normal"
-            onChange={this.changeName}
-          />
-        </Paper>
-      </Fragment>
-    );
+function Welcome(props) {
+  const { classes, name, dispatch } = props;
+  function changeName(event) {
+    dispatch(updateName(event.target.value));
   }
+  return (
+    <Fragment>
+      <Paper className={classes.root} elevation={1}>
+        <Typography variant="display1" gutterBottom component="h2">
+          Welcome
+        </Typography>
+        <Typography
+          style={{ color: "#3f51b5" }}
+          variant="headline"
+          component="h2"
+        >
+          {name}
+        </Typography>
+        <Typography style={{ marginTop: 30 }} component="p">
+          this is your home page served by Service A
+        </Typography>
+        <TextField
+          id="standard-name"
+          label="Name"
+          value={name}
+          margin="normal"
+          onChange={changeName}
+        />
+      </Paper>
+    </Fragment>
+  );
 }
 
 const mapStateToProps = state => ({
   name: state.name
 });
 
-const mapDispatchToProps = {
-  updateName
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Welcome));
+export default connect(mapStateToProps)(withStyles(styles)(Welcome));

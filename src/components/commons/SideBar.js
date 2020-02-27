@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -40,30 +40,28 @@ const styles = theme => ({
   }
 });
 
-export class SideBar extends Component {
-  render() {
-    const { classes, open, close } = this.props;
-    return (
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classNames(
-            classes.drawerPaper,
-            !open && classes.drawerPaperClose
-          )
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={close}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-      </Drawer>
-    );
-  }
+function SideBar(props) {
+  const { classes, open, close } = props;
+  return (
+    <Drawer
+      variant="permanent"
+      classes={{
+        paper: classNames(
+          classes.drawerPaper,
+          !open && classes.drawerPaperClose
+        )
+      }}
+      open={open}
+    >
+      <div className={classes.toolbarIcon}>
+        <IconButton onClick={close}>
+          <ChevronLeftIcon />
+        </IconButton>
+      </div>
+      <Divider />
+      <List>{mainListItems}</List>
+    </Drawer>
+  );
 }
 
 export default withStyles(styles)(SideBar);
