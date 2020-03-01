@@ -8,7 +8,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Navbar from "./components/commons/AppBar";
 import SideBar from "./components/commons/SideBar";
 import Welcome from "./components/pages/Dashboard/Dashboard";
-import ServiceB from "./components/pages/ServiceB/ServiceB";
+import AddSurvey from "./components/pages/AddSurvey";
 import SimpleTable from "./components/pages/Users/Users";
 
 import { getPosts } from "./store/actions/posts";
@@ -53,8 +53,8 @@ function App(props) {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Route path="/dashboard/" component={Welcome} />
-          <Route path="/nested/" component={ServiceB} />
           <Route path="/list/" component={SimpleTable} />
+          <Route path="/add-survey/" component={AddSurvey} />
         </main>
       </div>
     </Fragment>
