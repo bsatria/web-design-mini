@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import qs from "qs";
+
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import { connect } from "react-redux";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -21,6 +23,7 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 
 import { getItems, addItem } from "../../../api/items";
+import { getQuery, setQueryUrl } from "../../../helpers/query";
 
 const actionsStyles = theme => ({
   root: {
@@ -111,24 +114,40 @@ const styles = theme => ({
 });
 
 function Items(props) {
+  const history = useHistory();
+  const { nama: searchQ, page: pageQ } = getQuery();
   const { classes } = props;
   const [items, setItems] = useState([]);
   const [selectValue, setSelectValue] = useState({
     item: ""
   });
-
+  const [pageQuery, setPageQuery] = useState(pageQ || 1);
+  const [searchQuery, setSearchQuery] = useState(searchQ || "");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [refetch, setRefetch] = useState(0);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, items.length - page * rowsPerPage);
 
+  function defaultQuery() {
+    const search = searchQuery && { nama: searchQuery };
+    const query = qs.stringify(
+      {
+        page: pageQuery,
+        ...search
+      },
+      { encode: false }
+    );
+    return query;
+  }
+
   useEffect(() => {
-    getItems().then(res => {
+    getItems(defaultQuery()).then(res => {
       setItems(res.content);
-      setPage(res.number - 1);
+      setPageQuery(res.number);
     });
-  }, [page]);
+  }, [page, refetch]);
 
   function handleChangePage(event, page) {
     setPage(page);
@@ -151,6 +170,23 @@ function Items(props) {
       };
       addItem(data).then(res => alert("Success submit item"));
     }
+  }
+
+  function handleSearch(event) {
+    const { value } = event.target;
+    setSearchQuery(value);
+  }
+
+  function handleSubmitSearch(event) {
+    event.preventDefault();
+    let getUrl;
+    if (searchQuery) {
+      getUrl = setQueryUrl("nama", searchQuery);
+    } else {
+      getUrl = setQueryUrl("nama", "remove");
+    }
+    history.push(`/list-barang${getUrl}`);
+    setRefetch(refetch + 1);
   }
 
   return (
@@ -189,18 +225,18 @@ function Items(props) {
       <Typography variant="h5" gutterBottom component="h2">
         Daftar Barang
       </Typography>
-      <form className={classes.form} onSubmit={handleSubmit} noValidate>
+      <form className={classes.form} onSubmit={handleSubmitSearch} noValidate>
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <TextField
               variant="outlined"
               margin="normal"
               fullWidth
-              id="item"
+              id="searchQuery"
               label="Search Nama Barang"
-              name="item"
+              name="searchQuery"
               autoFocus
-              onChange={handleChange}
+              onChange={handleSearch}
             />
           </Grid>
           <Grid item xs={6} style={{ display: "flex", alignItems: "center" }}>
