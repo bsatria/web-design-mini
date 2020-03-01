@@ -29,7 +29,7 @@ const styles = theme => ({
   }
 });
 
-function Welcome(props) {
+function AddSurvey(props) {
   const { classes, name } = props;
   const [items, setItems] = useState([]);
   const [selectValue, setSelectValue] = useState({
@@ -117,4 +117,4 @@ const mapStateToProps = state => ({
   name: state.name
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(Welcome));
+export default connect(mapStateToProps)(withStyles(styles)(AddSurvey));

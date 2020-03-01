@@ -14,7 +14,6 @@ async function postData(url = "", data = {}) {
 
 async function getData(url) {
   const response = await fetch(url);
-  console.log(response);
   return await response.json();
 }
 

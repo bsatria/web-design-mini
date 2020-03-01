@@ -32,5 +32,13 @@ export const mainListItems = (
         <ListItemText primary="Add Survey" />
       </ListItem>
     </Link>
+    <Link style={{ textDecoration: "none" }} to="/list-barang">
+      <ListItem button>
+        <ListItemIcon>
+          <ListIcon />
+        </ListItemIcon>
+        <ListItemText primary="List Barang" />
+      </ListItem>
+    </Link>
   </div>
 );

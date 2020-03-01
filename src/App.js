@@ -9,6 +9,7 @@ import Navbar from "./components/commons/AppBar";
 import SideBar from "./components/commons/SideBar";
 import Welcome from "./components/pages/Dashboard/Dashboard";
 import AddSurvey from "./components/pages/AddSurvey";
+import Items from "./components/pages/Items";
 import SimpleTable from "./components/pages/Users/Users";
 
 import { getPosts } from "./store/actions/posts";
@@ -55,6 +56,7 @@ function App(props) {
           <Route path="/dashboard/" component={Welcome} />
           <Route path="/list/" component={SimpleTable} />
           <Route path="/add-survey/" component={AddSurvey} />
+          <Route path="/list-barang/" component={Items} />
         </main>
       </div>
     </Fragment>
