@@ -4,6 +4,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import ListIcon from "@material-ui/icons/List";
+import List from "@material-ui/core/List";
+import Collapse from "@material-ui/core/Collapse";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
@@ -22,14 +24,6 @@ export const mainListItems = (
           <ListIcon />
         </ListItemIcon>
         <ListItemText primary="List Users" />
-      </ListItem>
-    </Link>
-    <Link style={{ textDecoration: "none" }} to="/add-survey">
-      <ListItem button>
-        <ListItemIcon>
-          <ListIcon />
-        </ListItemIcon>
-        <ListItemText primary="Add Survey" />
       </ListItem>
     </Link>
     <Link style={{ textDecoration: "none" }} to="/list-barang">
